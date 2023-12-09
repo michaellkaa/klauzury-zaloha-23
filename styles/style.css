@@ -1,0 +1,174 @@
+* {
+    background-color: rgb(255, 255, 255);
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+#logo {
+    margin:0% 0% 5% 0%;
+    padding: 0%;
+    height: 120px;
+    width: 120px;
+    z-index: 10;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 5;
+}
+
+.in-main {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 7em 0 ;
+}
+
+.in-main h1 {
+    font-family: Work sans;
+    font-weight: 400;
+    margin: 0 0 1.75em 0;
+}
+
+.in-main h2 {
+    font-family: Work sans;
+    font-weight: 300;
+    font-style: italic;
+}
+
+.form {
+    font-family: work sans;
+    font-weight: 400;
+    margin: 0 0 4em 0 ;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.input-circle {
+    appearance: none;
+    background-color: #ffffff; /*background color*/
+    margin: 15px 10px 0 0;
+    color: none;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.12em solid rgb(0, 0, 0);
+    border-radius: 50%;
+    transition: 0.2s;
+}
+
+.input-circle::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    border-radius: 50%;
+}
+
+.input-circle:focus {
+    outline: max(2px, 0.15em) solid var(--first-color);
+    outline-offset: max(2px, 0.15em);
+    color: var(--first-color);
+    border: 0.15em solid var(--first-color);
+}
+
+.button-confirm {
+    border: black solid 1.5px;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 40px;
+}
+
+.background #obrazek{
+    margin: -8em 0 0 75em;
+    height: 270px;
+    width: auto;
+    z-index: 1;
+}
+
+.form-filter {
+    display: flex;
+    flex-direction: column;
+   
+}
+
+#recommendations{
+    font-family: work sans;
+}
+
+.item {
+    margin: 10px 0 30px 0;
+}
+
+#recommendations {
+    font-family: Work sans;
+    margin: -100px 0 0 50px;
+}
+
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid rgb(0, 0, 0);
+    font-size: 15px;
+    text-align: center;
+}
+
+#hlavni-div {
+    margin-top: -50px;
+    
+}
+
+.time-group h2 {
+grid-template-rows: 1fr;
+}
+
+#books-container, .time-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+}
+
+.book {
+    border: 1px solid #ccc;
+    margin: 10px;
+    padding: 10px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.book h2{
+    font-weight: 300;
+    font-family: Work sans;
+}
+
+.book img {
+    max-width: 50px;
+    height: auto;
+}
+
+.selected-book {
+    border: solid 1px var(--first-color);
+}
+
+.book-length{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+@media screen and (max-width: 780px) {
+   .main{margin: 0%;}
+   #obrazek {display: none;}
+}
+
+@media screen and (max-width: 780px) {
+    
+}

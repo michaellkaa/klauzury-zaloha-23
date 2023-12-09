@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Recommender</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/root.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="img/book-open.svg" type="image/x-icon">
+    <script src="script/dataBooks.js"></script>
+    <script src="script/script.js" async defer></script>
+    
+</head>
+<body >
+    <a href="index.html"><img src="img/images.jpeg" alt="" id="logo" ></a>
+
+        <div class="main">
+            <div class="in-main" id="hlavni-div">
+                <h1>Advanced Book Recommender</h1>
+                <h2>Form filter</h2>
+        <form id="bookFilterForm">
+        <div class="form-filter">
+        <div class="item">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
+        </div>
+        <div class="item">
+        <label for="author">Author:</label>
+        <input type="text" id="author" name="author">
+        </div>
+        <div class="item" id="druhContainer">
+            <label for="druh">Druh:</label>
+            <select id="druh" name="druh" onchange="updateGenreOptions()">
+                <option value="all-druh" id="all" selected>All</option>
+                <option value="epika" id="epika">Epika</option>
+                <option value="lyrika" id="lyrika">Lyrika</option>
+                <option value="drama" id="drama">Drama</option>
+                <option value="lyricko-epicke" id="lyricko-epicke">Lyricko-epické</option>
+
+            </select>
+        </div>
+        <div class="item" id="genreContainer">
+        <label for="lgenre">Genre:</label>
+        <select id="lgenre" name="form">
+        <option value="all-genre" selected>All</option>
+        <option value="báseň" id="basen">Báseň</option>
+        <option value="denik" id="denik">Deník</option>
+        <option value="svata-kniha" id="svata-kniha">Svatá kniha</option>
+        <option value="novela" id="novela">Novela</option>
+        <option value="pikareskni-roman" id="pikareskni-roman">Pikareskní román</option>
+        <option value="filosoficky-roman" id="filosoficky-roman">Filosofický román</option>
+        <option value="dopisnikovy-roman" id="dopisnikovy-roman">Dopisníkový román</option>
+        <option value="epos" id="epos">Epos</option>
+        <option value="komedie" id="komedie">Komedie</option>
+        <option value="tragedie" id="tragedie">Tragédie</option>
+        <option value="sonet" id="sonet">Sonet</option>
+        <option value="balada" id="balada">Balada</option>
+        <option value="romaneto" id="romaneto">Romaneto</option>
+        <option value="socialni-roman" id="socialni-roman">Sociální román</option>
+        <option value="sbirka-basni" id="sbirka-basni">Sbírka básní</option>
+        <option value="goticky-roman" id="goticky-roman">Gotický román</option>
+        <option value="basnicka-povidka" id="basnicka-povidka">Básnická povídka</option>
+        <option value="psychologicky-roman" id="psychologicky-roman">Psychologický román</option>
+        <option value="elegie" id="elegie">Elegie</option>
+        <option value="povest" id="povest">Pověst</option>
+        <option value="povidka" id="povidka">Povídka</option>
+        <option value="hororovy-roman" id="hororovy-roman">Hororový román</option>
+        <option value="detektivni-roman" id="detektivni-roman">Detektivní román</option>
+        <option value="vedeckofantasticky-roman" id="vedeckofantasticky-roman">Vědeckofantastický román</option>
+        <option value="autobiograficky-roman" id="autobiograficky-roman">Autobiografický román</option>
+        <option value="dystopicky-roman" id="dystopicky-roman">Dystopický román</option>
+        <option value="postapokalypticky-roman" id="postapokalypticky-roman">Postapokalyptický román</option>
+        <option value="rodinny-roman" id="rodinny-roman">Rodinný román</option>
+        <option value="surrealisticky-roman" id="surrealisticky-roman">Surrealistický román</option>
+        <option value="alegoricky-roman" id="alegoricky-roman">Alegorický román</option>
+        <option value="fantasy" id="fantasy">Fantasy</option>
+        <option value="kratke-povidky" id="kratke-povidky">Krátké povídky</option>
+        <option value="roman" id="roman">Román</option>
+
+       
+        
+        </select>
+        </div> <div class="item" id="timeContainer">
+            <label for="time">Time:</label>
+            <select id="time" name="time">
+                <option value="all-time" selected>All</option>
+                <option value="Světová a česká literatura do konce 18. století" id="1">Světová a česká literatura do konce 18. století</option>
+                <option value="Světová a česká literatura 19. století" id="2">Světová a česká literatura 19. století</option>
+                <option value="Světová literatura 20. a 21. století" id="3">Světová literatura 20. a 21. století</option>
+                <option value="Česká literatura 20. a 21. století" id="4">Česká literatura 20. a 21. století</option>
+            </select>
+        </div>
+               <button onclick="displayRecommendations()" class="button-confirm">Submit</button>    
+</div> 
+</div>
+    </form>  
+    </div>
+    
+    
+    
+
+    <div id="recommendations"></div>
+</body>
+</html>

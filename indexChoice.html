@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Recommender</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/root.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="img/book-open.svg" type="image/x-icon">
+    <script src="script/dataBooks.js"></script>
+    <script src="script/script.js" async defer></script>
+</head>
+<body>
+    <a href="index.html"><img src="img/images.jpeg" alt="" id="logo" ></a>
+    <div class="main">
+        <div class="in-main">
+        <h1>Advanced Book Recommender</h1>
+
+        <h2>Select Your Recommendation Method</h2>
+        <div class="form">
+            <div>
+                <label>
+                    <input type="radio" name="recommendationMethod" value="formFilter" class="input-circle"> Form Filter
+                </label>
+            </div>
+        
+            <div>
+                <label>
+                    <input type="radio" name="recommendationMethod" value="previouslyRead" class="input-circle"> Based on Previously Read
+                </label>
+            </div>
+        
+        
+        </div>        
+        <button onclick="submitSelection()" class="button-confirm">Submit</button>
+
+    </div>
+    <div class="background">
+        <img src="img/undraw_reading_list_re_bk72.svg" alt="" id="obrazek">
+    </div>
+
+    <script type="module" src="script/script.js"></script>
+    
+</body>
+</html>
