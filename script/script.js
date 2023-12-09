@@ -47,16 +47,16 @@ document.getElementById('bookFilterForm').addEventListener('submit', function(ev
     const name = document.getElementById('name').value;
     const author = document.getElementById('author').value;
     const genre = document.getElementById('lgenre').value;
-    const druh = document.getElementById('druh').value;
+    const form = document.getElementById('form').value;
     const time = document.getElementById('time').value;
 
     try {
-        if (!name && !author && !genre && !druh) {
+        if (!name && !author && !genre && !form) {
             throw new Error('Please provide at least one filter criteria.');
         }
 
-        console.log(name, author, genre, druh);
-        var recommendations = recommendBooks(name, author, genre, druh, time);
+        console.log(name, author, genre, form);
+        var recommendations = recommendBooks(name, author, genre, form, time);
         displayRecommendations(recommendations);
     } catch (error) {
         displayError(error.message);
@@ -81,25 +81,25 @@ function displayError(message) {
 }
 
 function updateGenreOptions() {
-    const druhSelect = document.getElementById('druh');
+    const formSelect = document.getElementById('form');
     const genreSelect = document.getElementById('lgenre');
     const timeSelect = document.getElementById('time');
 
-    const selectedDruh = druhSelect.value;
+    const selectedForm = formSelect.value;
 
     let genreOptions = ['All', 'Svatá kniha', 'Novela', 'Pikareskní román', 'Filosofický román', 'Dopisníkový román', 'Epos', 'Komedie', 'Tragédie', 'Sonet', 'Balada', 'Romaneto', 'Sociální román', 'Sbírka básní', 'Gotický román', 'Básnická povídka', 'Psychologický román', 'Elegie', 'Pověst', 'Báseň', 'Povídka', 'Hororový román','Detektivní román', 'Vědeckofantastický román', 'Autobiografický román', 'Dystopický román', 'Postapokalyptický román', 'Rodinný román', 'Surrealistický román', 'Alegorický román', 'Fantasy', 'Deník', 'Krátké povídky'];
     let timeOptions = ['All', 'Světová a česká literatura do konce 18. století', 'Světová a česká literatura 19. století', 'Světová literatura 20. a 21. století', 'Česká literatura 20. a 21. století'];
 
-    if (selectedDruh === 'epika') {
+    if (selectedForm === 'epika') {
         genreOptions = ['All', 'Svatá kniha', 'Novela', 'Pikareskní román', 'Filosofický román', 'Dopisníkový román', 'Epos', 'Romaneto', 'Sociální román', 'Gotický román', 'Psychologický román', 'Pověst', 'Povídka', 'Hororový román','Detektivní román', 'Vědeckofantastický román', 'Autobiografický román', 'Dystopický román', 'Postapokalyptický román', 'Rodinný román', 'Surrealistický román', 'Alegorický román', 'Fantasy', 'Deník', 'Krátké povídky'];
-    } else if (selectedDruh === 'lyrika') {
+    } else if (selectedForm === 'lyrika') {
         genreOptions = ['All', 'Sonet', 'Elegie', 'Báseň'];
-    } else if (selectedDruh === 'drama') {
+    } else if (selectedForm === 'drama') {
         genreOptions = ['All', 'Komedie', 'Tragédie'];
-    } else if (selectedDruh === 'all-druh') {
+    } else if (selectedForm === 'all-form') {
         genreOptions = ['All', 'Svatá kniha', 'Novela', 'Pikareskní román', 'Filosofický román', 'Dopisníkový román', 'Epos', 'Komedie', 'Tragédie', 'Sonet', 'Balada', 'Romaneto', 'Sociální román', 'Sbírka básní', 'Gotický román', 'Básnická povídka', 'Psychologický román', 'Elegie', 'Pověst', 'Báseň', 'Povídka', 'Hororový román','Detektivní román', 'Vědeckofantastický román', 'Autobiografický román', 'Dystopický román', 'Postapokalyptický román', 'Rodinný román', 'Surrealistický román', 'Alegorický román', 'Fantasy', 'Deník', 'Krátké povídky'];
     }
-    else if (selectedDruh === 'lyricko-epicke') {
+    else if (selectedForm === 'lyricko-epicke') {
         genreOptions = ['All', 'Básnická povídka', 'Balada'];
     }
 
@@ -125,22 +125,22 @@ function updateGenreOptions() {
     });
 }
 
-function recommendBooks(name, author, genre, druh, time) {
-    console.log("Filter Criteria:", name, author, genre, druh, time); 
+function recommendBooks(name, author, genre, form, time) {
+    console.log("Filter Criteria:", name, author, genre, form, time); 
 
-    const filteredByDruh = books.filter(function (book) {
-        if (druh === 'all-druh' || druh === 'All') {
+    const filteredByForm = books.filter(function (book) {
+        if (form === 'all-form' || form === 'All') {
             return true;
         }
 
-        if (book.druh.includes('all-druh')) {
+        if (book.form.includes('all-form')) {
             return true;
         }
 
-        return book.druh.includes(druh);
+        return book.form.includes(form);
     });
 
-    const filteredByGenre = filteredByDruh.filter(function (book) {
+    const filteredByGenre = filteredByForm.filter(function (book) {
         if ((genre === 'all-genre' || genre === 'All')) {
             return true;
         }

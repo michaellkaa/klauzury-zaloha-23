@@ -13,7 +13,7 @@ function onBookClick(book) {
             return;
         }
 
-        selectedBooks.push({ title: book.title, genre: book.genre, druh: book.druh, author: book.author });
+        selectedBooks.push({ title: book.title, genre: book.genre, Form: book.form, author: book.author });
     }
 
     console.log(`Selected books: ${JSON.stringify(selectedBooks)}`);
@@ -22,7 +22,7 @@ function onBookClick(book) {
 
 function findRecommendations(selectedBooks, books) {
     const selectedgenres = selectedBooks.flatMap(book => book.genre);
-    const selectedDruhs = selectedBooks.map(book => book.druh);
+    const selectedForms = selectedBooks.map(book => book.form);
 
     const authorCounts = {};
     selectedBooks.forEach(book => {
@@ -31,18 +31,18 @@ function findRecommendations(selectedBooks, books) {
 
     const excludedAuthors = Object.keys(authorCounts).filter(author => authorCounts[author] >= 3);
 
-    const commongenresAndDruh = books.filter(book => {
+    const commongenresAndForm = books.filter(book => {
         const commongenres = book.genre.some(genre => selectedgenres.includes(genre));
-        const commonDruh = selectedDruhs.includes(book.druh);
-        return commongenres && commonDruh;
+        const commonForm = selectedForms.includes(book.form);
+        return commongenres && commonform;
     });
 
-    if (commongenresAndDruh.length > 0) {
-        const filteredRecommendations = commongenresAndDruh.filter(book => 
+    if (commongenresAndForm.length > 0) {
+        const filteredRecommendations = commongenresAndform.filter(book => 
             !excludedAuthors.includes(book.author) && 
             !selectedBooks.some(selectedBook => selectedBook.title === book.title)
         );
-        return filteredRecommendations.length > 0 ? filteredRecommendations : commongenresAndDruh;
+        return filteredRecommendations.length > 0 ? filteredRecommendations : commongenresAndform;
     } else {
         const genreRecommendations = books.filter(book => 
             book.genre.some(genre => selectedgenres.includes(genre)) &&
@@ -54,7 +54,7 @@ function findRecommendations(selectedBooks, books) {
 
 function checkSharedgenres() {
     const sharedgenres = {};
-    const sharedDruh = {};
+    const sharedForm = {};
 
     selectedBooks.forEach((selectedBook, index) => {
         selectedBook.genre.forEach(genre => {
@@ -65,11 +65,11 @@ function checkSharedgenres() {
             }
         });
 
-        const druh = selectedBook.druh;
-        if (sharedDruh[druh]) {
-            sharedDruh[druh].push(selectedBook.title);
+        const form = selectedBook.form;
+        if (sharedForm[form]) {
+            sharedForm[form].push(selectedBook.title);
         } else {
-            sharedDruh[druh] = [selectedBook.title];
+            sharedForm[form] = [selectedBook.title];
         }
     });
 
@@ -79,9 +79,9 @@ function checkSharedgenres() {
         }
     }
 
-    for (const druh in sharedDruh) {
-        if (sharedDruh[druh].length >= 2) {
-            console.log(`Shared Druh: ${druh}, Books: ${sharedDruh[druh].join(', ')}`);
+    for (const Form in sharedform) {
+        if (sharedForm[form].length >= 2) {
+            console.log(`Shared Form: ${form}, Books: ${sharedForm[form].join(', ')}`);
         }
     }
 }
