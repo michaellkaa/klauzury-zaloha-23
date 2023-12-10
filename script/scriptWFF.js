@@ -30,6 +30,31 @@ function searchBooks() {
   fetchAndDisplayResults(apiUrl);
 }
 
+function filterResultsByLength(items) {
+  const bookLength = getSelectedBookLength() || 'any';
+
+  if (bookLength === 'any') {
+    return items; 
+  }
+
+  const filteredResults = items.filter(item => {
+    const pageCount = item.volumeInfo.pageCount || 0;
+
+    switch (bookLength) {
+      case 'short':
+        return pageCount >= 0 && pageCount <= 150;
+      case 'medium':
+        return pageCount >= 151 && pageCount <= 600;
+      case 'long':
+        return pageCount >= 601;
+      default:
+        return true;
+    }
+  });
+
+  return filteredResults;
+}
+
 async function fetchAndDisplayResults(url) {
   const resultsDiv = document.getElementById('recommendations');
   resultsDiv.innerHTML = 'Loading...';
@@ -59,31 +84,6 @@ async function fetchAndDisplayResults(url) {
     console.error('Error fetching data:', error);
     resultsDiv.innerHTML = 'An error occurred while fetching the data.';
   }
-}
-
-function filterResultsByLength(items) {
-  const bookLength = getSelectedBookLength() || 'any';
-
-  if (bookLength === 'any') {
-    return items; 
-  }
-
-  const filteredResults = items.filter(item => {
-    const pageCount = item.volumeInfo.pageCount || 0;
-
-    switch (bookLength) {
-      case 'short':
-        return pageCount >= 0 && pageCount <= 150;
-      case 'medium':
-        return pageCount >= 151 && pageCount <= 600;
-      case 'long':
-        return pageCount >= 601;
-      default:
-        return true;
-    }
-  });
-
-  return filteredResults;
 }
 
 function buildApiUrl({ author, bookName, category }) {
@@ -127,7 +127,7 @@ function displayResults(data, resultsDiv) {
     });
   } else {
     console.log('No results found:', data);
-    resultsDiv.innerHTML = 'No results found.';
+    resultsDiv.innerHTML = 'No books found matching the criteria.';
   }
 }
 
