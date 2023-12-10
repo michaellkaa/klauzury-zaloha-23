@@ -1,27 +1,31 @@
 const selectedBooks = [];
 
 function onBookClick(book) {
+    const authorCount = selectedBooks.filter(selectedBook => selectedBook.author === book.author).length;
+
+    if (authorCount >= 2) {
+        console.log(`You can't have the same author (${book.author}) more than twice in your list.`);
+        return;
+    }
+
     const index = selectedBooks.findIndex(selectedBook => selectedBook.title === book.title);
 
     if (index !== -1) {
         selectedBooks.splice(index, 1);
     } else {
-        const authorCount = selectedBooks.filter(selectedBook => selectedBook.author === book.author).length;
-
-        if (authorCount >= 2) {
+        if (authorCount + 1 <= 2) {
+            selectedBooks.push({ title: book.title, genre: book.genre, Form: book.form, author: book.author });
+        } else {
             console.log(`You can't have the same author (${book.author}) more than twice in your list.`);
-            return;
         }
-
-        selectedBooks.push({ title: book.title, genre: book.genre, Form: book.form, author: book.author });
     }
 
     console.log(`Selected books: ${JSON.stringify(selectedBooks)}`);
-    checkSharedgenres();
+    checksharedGenres();
 }
 
 function findRecommendations(selectedBooks, books) {
-    const selectedgenres = selectedBooks.flatMap(book => book.genre);
+    const selectedGenres = selectedBooks.flatMap(book => book.genre);
     const selectedForms = selectedBooks.map(book => book.form);
 
     const authorCounts = {};
@@ -29,39 +33,39 @@ function findRecommendations(selectedBooks, books) {
         authorCounts[book.author] = (authorCounts[book.author] || 0) + 1;
     });
 
-    const excludedAuthors = Object.keys(authorCounts).filter(author => authorCounts[author] >= 3);
+    const excludedAuthors = Object.keys(authorCounts).filter(author => authorCounts[author] >= 2);
 
-    const commongenresAndForm = books.filter(book => {
-        const commongenres = book.genre.some(genre => selectedgenres.includes(genre));
+    const commonGenresAndForm = books.filter(book => {
+        const commonGenres = book.genre.some(genre => selectedGenres.includes(genre));
         const commonForm = selectedForms.includes(book.form);
-        return commongenres && commonform;
+        return commonGenres && commonForm;
     });
 
-    if (commongenresAndForm.length > 0) {
-        const filteredRecommendations = commongenresAndform.filter(book => 
+    if (commonGenresAndForm.length > 0) {
+        const filteredRecommendations = commonGenresAndForm.filter(book => 
             !excludedAuthors.includes(book.author) && 
             !selectedBooks.some(selectedBook => selectedBook.title === book.title)
         );
-        return filteredRecommendations.length > 0 ? filteredRecommendations : commongenresAndform;
+        return filteredRecommendations.length > 0 ? filteredRecommendations : commonGenresAndForm;
     } else {
         const genreRecommendations = books.filter(book => 
-            book.genre.some(genre => selectedgenres.includes(genre)) &&
+            book.genre.some(genre => selectedGenres.includes(genre)) &&
             !selectedBooks.some(selectedBook => selectedBook.title === book.title)
         );
         return genreRecommendations.length > 0 ? genreRecommendations : books;
     }
 }
 
-function checkSharedgenres() {
-    const sharedgenres = {};
+function checksharedGenres() {
+    const sharedGenres = {};
     const sharedForm = {};
 
     selectedBooks.forEach((selectedBook, index) => {
         selectedBook.genre.forEach(genre => {
-            if (sharedgenres[genre]) {
-                sharedgenres[genre].push(selectedBook.title);
+            if (sharedGenres[genre]) {
+                sharedGenres[genre].push(selectedBook.title);
             } else {
-                sharedgenres[genre] = [selectedBook.title];
+                sharedGenres[genre] = [selectedBook.title];
             }
         });
 
@@ -73,15 +77,15 @@ function checkSharedgenres() {
         }
     });
 
-    for (const genre in sharedgenres) {
-        if (sharedgenres[genre].length >= 2) {
-            console.log(`Shared genre: ${genre}, Books: ${sharedgenres[genre].join(', ')}`);
+    for (const genre in sharedGenres) {
+        if (sharedGenres[genre].length >= 2) {
+            console.log(`Shared genre: ${genre}, Books: ${sharedGenres[genre].join(', ')}`);
         }
     }
 
-    for (const Form in sharedform) {
-        if (sharedForm[form].length >= 2) {
-            console.log(`Shared Form: ${form}, Books: ${sharedForm[form].join(', ')}`);
+    for (const Form in sharedForm) {
+        if (sharedForm[Form].length >= 2) {
+            console.log(`Shared Form: ${Form}, Books: ${sharedForm[Form].join(', ')}`);
         }
     }
 }

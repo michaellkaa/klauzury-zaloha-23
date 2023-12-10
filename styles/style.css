@@ -169,6 +169,19 @@ grid-template-rows: 1fr;
    #obrazek {display: none;}
 }
 
-@media screen and (max-width: 780px) {
+@media screen and (max-width: 680px) {
+    .selected-book {border: 1px solid var(--first-color);}
+    .input-circle {
+        display: none;
+    }
     
+    /* Style the label's text color initially */
+    .label-text {
+        color: black; /* Set the initial color */
+    }
+    
+    /* Style the label's text color when the associated radio button is checked */
+    .input-circle:checked + .label-text {
+        color: var(--first-color); /* Set the color when checked */
+    }
 }
